@@ -16,13 +16,19 @@ function App() {
 
   return (
     <div className="app">
-      <nav className="navbar">
+      <nav className="navbar premium-nav">
         <div className="brand-area">
           <div className="logo-mark">D</div>
           <div>
             <h2>DevLink</h2>
-            <p>Architecture-first developer portfolios</p>
+            <p>Architecture-first portfolios</p>
           </div>
+        </div>
+
+        <div className="nav-links">
+          <a href="#how">How it works</a>
+          <a href="#features">Features</a>
+          <a href="#recruiters">Recruiters</a>
         </div>
 
         <div className="nav-actions">
@@ -32,7 +38,6 @@ function App() {
           >
             Login
           </button>
-
           <button
             className={mode === "register" ? "active" : ""}
             onClick={() => setMode("register")}
@@ -42,92 +47,190 @@ function App() {
         </div>
       </nav>
 
-      <main className="hero product-hero">
-        <section className="hero-left">
-          <span className="badge">Portfolio-Driven Job Board for Developers</span>
+      <main className="premium-hero">
+        <section className="hero-copy">
+          <span className="badge">Portfolio-driven job board for indie developers</span>
 
-          <h1>The architecture-first portfolio platform for developers.</h1>
+          <h1>
+            Turn your GitHub projects into a verified technical portfolio.
+          </h1>
 
           <p>
-            DevLink turns GitHub repositories into verified technical portfolios.
-            Sync your projects, explain architectural decisions, and show
-            recruiters how you think as an engineer.
+            DevLink helps students and indie developers showcase not only what
+            they built, but how they designed it. Sync repositories, add
+            architecture notes, and present your engineering decisions clearly.
           </p>
 
           <div className="hero-actions">
             <button onClick={() => setMode("register")}>Start Building</button>
             <button className="secondary" onClick={() => setMode("login")}>
-              I already have an account
+              Login to Dashboard
             </button>
           </div>
 
-          <div className="feature-grid">
+          <div className="hero-metrics">
             <div>
-              <strong>GitHub Sync</strong>
-              <span>Import public repositories automatically.</span>
+              <strong>GitHub</strong>
+              <span>Repository Sync</span>
             </div>
-
             <div>
-              <strong>Architecture Notes</strong>
-              <span>Document patterns, trade-offs, and decisions.</span>
+              <strong>JWT</strong>
+              <span>Secure Auth</span>
             </div>
-
             <div>
-              <strong>Verified Portfolio</strong>
-              <span>Show technical depth beyond project names.</span>
-            </div>
-
-            <div>
-              <strong>Recruiter Ready</strong>
-              <span>Present your engineering thinking clearly.</span>
+              <strong>PostgreSQL</strong>
+              <span>Persistent Data</span>
             </div>
           </div>
         </section>
 
-        <section className="right-column">
-          <div className="product-preview">
-            <div className="preview-header">
+        <section className="hero-showcase">
+          <div className="mock-browser">
+            <div className="mock-top">
               <span></span>
               <span></span>
               <span></span>
+              <p>devlink.app/portfolio/melis</p>
             </div>
 
-            <div className="preview-content">
-              <h3>Portfolio Preview</h3>
-
-              <div className="preview-card">
-                <p className="preview-title">devlink-api</p>
-                <p>Node.js · Express · PostgreSQL</p>
-                <small>Architecture note documented</small>
+            <div className="mock-content">
+              <div className="mock-sidebar">
+                <div className="mock-avatar">M</div>
+                <h4>Melis Kahraman</h4>
+                <p>Frontend & Architecture Portfolio</p>
+                <button>Public Portfolio</button>
               </div>
 
-              <div className="preview-card">
-                <p className="preview-title">frontend-dashboard</p>
-                <p>React · Axios · JWT Auth</p>
-                <small>GitHub repository synced</small>
-              </div>
-
-              <div className="preview-progress">
-                <div>
-                  <span>Portfolio Completion</span>
-                  <strong>82%</strong>
+              <div className="mock-main">
+                <div className="mock-stats">
+                  <div>
+                    <b>12</b>
+                    <span>Projects</span>
+                  </div>
+                  <div>
+                    <b>8</b>
+                    <span>Notes</span>
+                  </div>
+                  <div>
+                    <b>86%</b>
+                    <span>Complete</span>
+                  </div>
                 </div>
-                <div className="mini-progress">
-                  <div></div>
+
+                <div className="mock-repo">
+                  <div>
+                    <h4>devlink-api</h4>
+                    <p>Express REST API with JWT authentication and PostgreSQL.</p>
+                  </div>
+                  <span>Architecture documented</span>
+                </div>
+
+                <div className="mock-repo">
+                  <div>
+                    <h4>portfolio-dashboard</h4>
+                    <p>React SPA for syncing projects and writing architecture notes.</p>
+                  </div>
+                  <span>GitHub synced</span>
+                </div>
+
+                <div className="mock-note">
+                  <h4>Architecture Note</h4>
+                  <p>
+                    Used layered architecture to separate presentation,
+                    service, API, and persistence concerns.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
 
-          <section className="auth-panel">
+          <div className="auth-floating-card">
             {mode === "login" ? (
               <LoginForm onLogin={() => setIsLoggedIn(true)} />
             ) : (
               <RegisterForm />
             )}
-          </section>
+          </div>
         </section>
       </main>
+
+      <section id="how" className="section-block">
+        <div className="section-heading">
+          <span className="badge">How it works</span>
+          <h2>From repository to recruiter-ready portfolio.</h2>
+        </div>
+
+        <div className="steps-grid">
+          <div>
+            <span>01</span>
+            <h3>Create account</h3>
+            <p>Register securely and access your developer dashboard.</p>
+          </div>
+          <div>
+            <span>02</span>
+            <h3>Sync GitHub</h3>
+            <p>Import public repositories into your technical profile.</p>
+          </div>
+          <div>
+            <span>03</span>
+            <h3>Add architecture notes</h3>
+            <p>Explain design patterns, trade-offs, and system decisions.</p>
+          </div>
+          <div>
+            <span>04</span>
+            <h3>Show your portfolio</h3>
+            <p>Present engineering thinking, not only project names.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" className="section-block">
+        <div className="section-heading">
+          <span className="badge">Features</span>
+          <h2>Built for architecture-focused technical portfolios.</h2>
+        </div>
+
+        <div className="premium-feature-grid">
+          <div>
+            <h3>Verified project metadata</h3>
+            <p>Import real repository data from GitHub and store it persistently.</p>
+          </div>
+          <div>
+            <h3>Architecture documentation</h3>
+            <p>Attach technical notes that explain why your system is designed that way.</p>
+          </div>
+          <div>
+            <h3>Secure authentication</h3>
+            <p>JWT-based login protects portfolio management features.</p>
+          </div>
+          <div>
+            <h3>Portfolio insights</h3>
+            <p>Track project count, technology usage, and portfolio completion.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="recruiters" className="recruiter-section">
+        <div>
+          <span className="badge">For recruiters</span>
+          <h2>Evaluate how developers think, not only what they built.</h2>
+          <p>
+            DevLink makes architectural decisions visible. Recruiters can
+            understand technology choices, design patterns, and engineering
+            reasoning before an interview.
+          </p>
+        </div>
+
+        <div className="recruiter-card">
+          <h3>Candidate Signal</h3>
+          <ul>
+            <li>Project ownership</li>
+            <li>Architecture awareness</li>
+            <li>Technology experience</li>
+            <li>Decision-making clarity</li>
+          </ul>
+        </div>
+      </section>
     </div>
   );
 }
