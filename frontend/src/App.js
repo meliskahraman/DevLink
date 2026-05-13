@@ -1,10 +1,18 @@
 import { useState } from "react";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
+import Dashboard from "./components/Dashboard";
 import "./App.css";
 
 function App() {
   const [mode, setMode] = useState("login");
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    Boolean(localStorage.getItem("token"))
+  );
+
+  if (isLoggedIn) {
+    return <Dashboard />;
+  }
 
   return (
     <div className="app">
@@ -15,44 +23,38 @@ function App() {
         </div>
 
         <div className="nav-actions">
-          <button
-            className={mode === "login" ? "active" : ""}
-            onClick={() => setMode("login")}
-          >
-            Login
-          </button>
-
-          <button
-            className={mode === "register" ? "active" : ""}
-            onClick={() => setMode("register")}
-          >
-            Register
-          </button>
+          <button onClick={() => setMode("login")}>Login</button>
+          <button onClick={() => setMode("register")}>Register</button>
         </div>
       </nav>
 
       <main className="hero">
         <section className="hero-left">
-          <span className="badge">Phase 2 Deployment Ready</span>
+          <span className="badge">Verified Technical Portfolios</span>
 
-          <h1>Showcase your code architecture, not just your projects.</h1>
+          <h1>Show the architecture behind your code.</h1>
 
           <p>
             DevLink helps indie developers and students build a verified
-            technical portfolio with GitHub synchronization, architecture notes,
-            JWT authentication and PostgreSQL persistence.
+            portfolio by syncing GitHub repositories and attaching Architecture
+            Notes that explain design patterns, technical decisions, and system
+            structure.
           </p>
 
           <div className="feature-grid">
             <div>GitHub Sync</div>
-            <div>JWT Auth</div>
-            <div>PostgreSQL</div>
+            <div>JWT Authentication</div>
+            <div>PostgreSQL Persistence</div>
             <div>Architecture Notes</div>
           </div>
         </section>
 
         <section className="auth-panel">
-          {mode === "login" ? <LoginForm /> : <RegisterForm />}
+          {mode === "login" ? (
+            <LoginForm onLogin={() => setIsLoggedIn(true)} />
+          ) : (
+            <RegisterForm />
+          )}
         </section>
       </main>
     </div>

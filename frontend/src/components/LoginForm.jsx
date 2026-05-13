@@ -24,6 +24,11 @@ function LoginForm() {
       localStorage.setItem("token", token);
 
       setMessage("Login successful");
+
+      // Login başarılı olunca Dashboard'u göstermek için sayfayı yenile
+      if (typeof window !== "undefined") {
+        window.location.reload();
+      }
     } catch (error) {
       setMessage(error.response?.data?.message || "Login failed");
     }

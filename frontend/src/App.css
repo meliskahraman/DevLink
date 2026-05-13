@@ -137,3 +137,106 @@ body {
 .auth-panel button:hover {
   background: #1d4ed8;
 }
+
+/* Dashboard Styles */
+
+.dashboard {
+  min-height: 100vh;
+  padding: 50px 70px;
+  background: #0f172a;
+  color: white;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.dashboard-header h2 {
+  font-size: 40px;
+  margin: 0;
+  color: #38bdf8;
+}
+
+.dashboard-header p {
+  color: #cbd5e1;
+}
+
+.dashboard-header button,
+.dashboard-card button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #38bdf8;
+  color: #0f172a;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.dashboard-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 20px;
+  padding: 28px;
+  margin-bottom: 24px;
+}
+
+.dashboard-card h3 {
+  margin-top: 0;
+  color: #93c5fd;
+}
+
+.dashboard-card input,
+.dashboard-card select,
+.dashboard-card textarea {
+  width: 100%;
+  margin: 10px 0 16px;
+  padding: 13px;
+  border-radius: 10px;
+  border: 1px solid #64748b;
+  font-size: 15px;
+}
+
+.dashboard-card textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.project-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.project-card {
+  background: #0f172a;
+  border: 1px solid #334155;
+  padding: 18px;
+  border-radius: 16px;
+}
+
+.project-card h4 {
+  margin-top: 0;
+  color: #f8fafc;
+}
+
+.project-card p {
+  color: #cbd5e1;
+}
+
+.project-card a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.project-card a:hover {
+  text-decoration: underline;
+}
+
+.status-message {
+  color: #7dd3fc;
+  font-weight: bold;
+  margin-top: 16px;
+}
