@@ -11,7 +11,7 @@ function RegisterForm() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
+        "https://devlink-api-3y46.onrender.com/api/auth/register",
         {
           email,
           password,
@@ -29,7 +29,7 @@ function RegisterForm() {
   };
 
   return (
-    <div style={{ padding: "40px" }}>
+    <div>
       <h2>Register</h2>
 
       <form onSubmit={handleRegister}>

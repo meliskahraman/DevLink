@@ -30,7 +30,7 @@ function LoginForm() {
   };
 
   return (
-    <div style={{ padding: "40px" }}>
+    <div>
       <h2>Login</h2>
 
       <form onSubmit={handleLogin}>
