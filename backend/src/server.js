@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const sequelize = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
+const projectRoutes = require("./routes/projectRoutes");
 const authMiddleware = require("./middleware/authMiddleware");
 require("./models");
 
@@ -20,6 +21,9 @@ app.use(express.json());
 
 // Auth API Routes
 app.use("/api/auth", authRoutes);
+
+// Project API Routes
+app.use("/api/projects", projectRoutes);
 
 // Protected Test Route
 app.get("/api/protected-test", authMiddleware, (req, res) => {
