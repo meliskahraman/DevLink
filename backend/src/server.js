@@ -6,6 +6,7 @@ const sequelize = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const noteRoutes = require("./routes/noteRoutes");
+const recruiterRoutes = require("./routes/recruiterRoutes");
 const authMiddleware = require("./middleware/authMiddleware");
 require("./models");
 
@@ -35,6 +36,9 @@ app.use("/api/projects", projectRoutes);
 
 // Architecture Note API Routes
 app.use("/api/architecture-notes", noteRoutes);
+
+// Recruiter API Routes
+app.use("/api/recruiter", recruiterRoutes);
 
 // Protected Test Route
 app.get("/api/protected-test", authMiddleware, (req, res) => {

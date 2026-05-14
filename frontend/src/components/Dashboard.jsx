@@ -9,6 +9,9 @@ function Dashboard() {
   const [notes, setNotes] = useState([]);
   const [message, setMessage] = useState("");
 
+  const [recruiterTech, setRecruiterTech] = useState("");
+  const [candidates, setCandidates] = useState([]);
+
   const stats = useMemo(() => {
     const totalProjects = projects.length;
     const languages = [
@@ -69,6 +72,21 @@ function Dashboard() {
     }
   };
 
+  const handleFilterCandidates = async () => {
+    try {
+      const response = await api.get(
+        `/api/recruiter/candidates?tech=${encodeURIComponent(recruiterTech)}`
+      );
+
+      setCandidates(response.data.candidates || []);
+      setMessage("Candidates filtered successfully.");
+    } catch (error) {
+      setMessage(
+        error.response?.data?.message || "Failed to filter candidates."
+      );
+    }
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.reload();
@@ -97,6 +115,7 @@ function Dashboard() {
             <a href="#sync">GitHub Sync</a>
             <a href="#projects">Repositories</a>
             <a href="#notes">Architecture Notes</a>
+            <a href="#recruiter">Recruiter Filter</a>
             <a href="#insights">Insights</a>
           </nav>
 
@@ -254,6 +273,62 @@ function Dashboard() {
                     </div>
                   );
                 })
+              )}
+            </div>
+          </section>
+
+          <section id="recruiter" className="dashboard-card">
+            <h3>Recruiter Filter Candidates</h3>
+            <p>
+              Search developers by technology stack to discover relevant
+              technical portfolios.
+            </p>
+
+            <input
+              type="text"
+              placeholder="e.g. JavaScript, Python, React"
+              value={recruiterTech}
+              onChange={(e) => setRecruiterTech(e.target.value)}
+            />
+
+            <button onClick={handleFilterCandidates}>Filter Candidates</button>
+
+            <div className="notes-list">
+              <h4>Candidate Results</h4>
+
+              {candidates.length === 0 ? (
+                <p>No candidates found.</p>
+              ) : (
+                candidates.map((candidate, index) => (
+                  <div className="note-item" key={index}>
+                    <strong>{candidate.developer_email}</strong>
+
+                    <p>
+                      <strong>Project:</strong> {candidate.project_name}
+                    </p>
+
+                    <p>
+                      <strong>Tech Stack:</strong> {candidate.tech_stack}
+                    </p>
+
+                    <a
+                      href={candidate.github_url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Open Repository
+                    </a>
+
+                    {candidate.architecture_notes?.length > 0 && (
+                      <div style={{ marginTop: "10px" }}>
+                        <strong>Architecture Notes:</strong>
+                        {candidate.architecture_notes.map((note, noteIndex) => (
+                          <p key={noteIndex}>{note}</p>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))
               )}
             </div>
           </section>
