@@ -17,53 +17,67 @@ function LoginForm() {
 
       const token = response.data.token;
 
-      // JWT token'ı localStorage'a kaydet
       localStorage.setItem("token", token);
 
-      setMessage("Login successful");
+      setMessage("Access granted. Loading workspace...");
 
-      // Login başarılı olunca Dashboard'u göstermek için sayfayı yenile
       if (typeof window !== "undefined") {
         window.location.reload();
       }
     } catch (error) {
       console.log("LOGIN ERROR:", error.response?.data || error.message);
 
-      setMessage(error.response?.data?.message || "Login failed");
+      setMessage(error.response?.data?.message || "Access denied.");
     }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="terminal-auth">
+      <div className="terminal-header">
+        <div className="terminal-dots">
+          <span className="dot red"></span>
+          <span className="dot yellow"></span>
+          <span className="dot green"></span>
+        </div>
 
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <span className="terminal-title">devlink/auth/login</span>
+      </div>
 
-        <br />
-        <br />
+      <div className="terminal-body">
+        <p className="terminal-line">
+          <span>$</span> authenticate developer workspace
+        </p>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <h2>Login</h2>
 
-        <br />
-        <br />
+        <form onSubmit={handleLogin}>
+          <label>Email</label>
+          <input
+            type="email"
+            placeholder="user@devlink.app"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-        <button type="submit">Login</button>
-      </form>
+          <label>Password</label>
+          <input
+            type="password"
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-      <p>{message}</p>
+          <button type="submit">Run Login Command</button>
+        </form>
+
+        {message && (
+          <p className="terminal-message">
+            <span>&gt;</span> {message}
+          </p>
+        )}
+      </div>
     </div>
   );
 }

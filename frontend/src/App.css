@@ -1012,3 +1012,79 @@ body {
     width: 100px;
   }
 }
+
+/* Terminal Auth UI */
+
+.terminal-auth {
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+.terminal-header {
+  height: 42px;
+  background: rgba(10, 10, 10, 0.75);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot.red {
+  background: #ff5f57;
+}
+
+.dot.yellow {
+  background: #febc2e;
+}
+
+.dot.green {
+  background: #28c840;
+}
+
+.terminal-title {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-family: "Courier New", monospace;
+}
+
+.terminal-body {
+  padding: 24px;
+}
+
+.terminal-line {
+  margin: 0 0 18px;
+  color: var(--accent-hover);
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+}
+
+.terminal-line span {
+  margin-right: 8px;
+}
+
+.terminal-body label {
+  display: block;
+  margin: 14px 0 6px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.terminal-message {
+  margin-top: 16px;
+  color: var(--accent-hover);
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+}
