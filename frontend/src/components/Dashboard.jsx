@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import api from "../services/api";
 
 function Dashboard() {
@@ -25,6 +25,19 @@ function Dashboard() {
     };
   }, [projects, noteContent]);
 
+  const fetchNotes = async () => {
+    try {
+      const response = await api.get("/api/architecture-notes");
+      setNotes(response.data.notes || []);
+    } catch (error) {
+      console.log("FETCH NOTES ERROR:", error.response?.data || error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchNotes();
+  }, []);
+
   const handleSync = async () => {
     try {
       const response = await api.post("/api/projects/sync", {
@@ -45,17 +58,11 @@ function Dashboard() {
         note_content: noteContent,
       });
 
-      setNotes((prevNotes) => [
-        ...prevNotes,
-        {
-          project_id: selectedProjectId,
-          note_content: noteContent,
-        },
-      ]);
-
       setMessage(response.data.message);
       setNoteContent("");
       setSelectedProjectId("");
+
+      await fetchNotes();
     } catch (error) {
       setMessage(error.response?.data?.message || "Failed to add note.");
     }
@@ -230,13 +237,13 @@ function Dashboard() {
               {notes.length === 0 ? (
                 <p>No architecture notes added yet.</p>
               ) : (
-                notes.map((note, index) => {
+                notes.map((note) => {
                   const project = projects.find(
                     (p) => String(p.id) === String(note.project_id)
                   );
 
                   return (
-                    <div className="note-item" key={index}>
+                    <div className="note-item" key={note.id}>
                       <strong>
                         {project?.project_name || "Unknown Project"}
                       </strong>

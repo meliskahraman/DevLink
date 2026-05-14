@@ -40,6 +40,36 @@ const addArchitectureNote = async (req, res) => {
   }
 };
 
+const getArchitectureNotes = async (req, res) => {
+  try {
+    const projects = await Project.findAll({
+      where: {
+        user_id: req.user.id,
+      },
+      attributes: ["id"],
+    });
+
+    const projectIds = projects.map((project) => project.id);
+
+    const notes = await ArchitectureNote.findAll({
+      where: {
+        project_id: projectIds,
+      },
+      order: [["id", "DESC"]],
+    });
+
+    res.status(200).json({
+      notes,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to fetch architecture notes",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   addArchitectureNote,
+  getArchitectureNotes,
 };
