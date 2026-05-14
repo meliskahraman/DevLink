@@ -10,7 +10,7 @@ function RegisterForm() {
     e.preventDefault();
 
     try {
-      const response = await api.post("/api/auth/register", {
+      await api.post("/api/auth/register", {
         email,
         password,
       });
