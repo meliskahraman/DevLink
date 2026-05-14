@@ -6,6 +6,7 @@ function Dashboard() {
   const [projects, setProjects] = useState([]);
   const [selectedProjectId, setSelectedProjectId] = useState("");
   const [noteContent, setNoteContent] = useState("");
+  const [notes, setNotes] = useState([]);
   const [message, setMessage] = useState("");
 
   const stats = useMemo(() => {
@@ -44,8 +45,17 @@ function Dashboard() {
         note_content: noteContent,
       });
 
+      setNotes((prevNotes) => [
+        ...prevNotes,
+        {
+          project_id: selectedProjectId,
+          note_content: noteContent,
+        },
+      ]);
+
       setMessage(response.data.message);
       setNoteContent("");
+      setSelectedProjectId("");
     } catch (error) {
       setMessage(error.response?.data?.message || "Failed to add note.");
     }
@@ -213,6 +223,29 @@ function Dashboard() {
             />
 
             <button onClick={handleAddNote}>Save Architecture Note</button>
+
+            <div className="notes-list">
+              <h4>Saved Notes</h4>
+
+              {notes.length === 0 ? (
+                <p>No architecture notes added yet.</p>
+              ) : (
+                notes.map((note, index) => {
+                  const project = projects.find(
+                    (p) => String(p.id) === String(note.project_id)
+                  );
+
+                  return (
+                    <div className="note-item" key={index}>
+                      <strong>
+                        {project?.project_name || "Unknown Project"}
+                      </strong>
+                      <p>{note.note_content}</p>
+                    </div>
+                  );
+                })
+              )}
+            </div>
           </section>
 
           <section id="insights" className="dashboard-card">

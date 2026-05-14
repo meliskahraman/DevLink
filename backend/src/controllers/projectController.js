@@ -3,29 +3,40 @@ const { syncGithubRepos } = require("../services/ExternalApiService");
 
 const syncProjects = async (req, res) => {
   try {
-    console.log("SYNC REQUEST RECEIVED");
-    console.log("User:", req.user);
-    console.log("Body:", req.body);
-
     const { githubUsername } = req.body;
 
     if (!githubUsername) {
-      return res.status(400).json({ message: "GitHub username is required" });
+      return res.status(400).json({
+        message: "GitHub username is required",
+      });
+    }
+
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({
+        message: "Unauthorized user",
+      });
     }
 
     const repos = await syncGithubRepos(githubUsername);
-    console.log("Repos fetched:", repos.length);
 
-    const savedProjects = await Promise.all(
-      repos.map((repo) =>
-        Project.create({
+    const savedProjects = [];
+
+    for (const repo of repos) {
+      const [project] = await Project.findOrCreate({
+        where: {
+          user_id: req.user.id,
+          github_url: repo.github_url,
+        },
+        defaults: {
           user_id: req.user.id,
           project_name: repo.project_name,
           tech_stack: repo.tech_stack,
           github_url: repo.github_url,
-        })
-      )
-    );
+        },
+      });
+
+      savedProjects.push(project);
+    }
 
     res.status(200).json({
       message: "GitHub projects synced successfully",
