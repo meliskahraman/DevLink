@@ -3,6 +3,10 @@ const { syncGithubRepos } = require("../services/ExternalApiService");
 
 const syncProjects = async (req, res) => {
   try {
+    console.log("SYNC REQUEST RECEIVED");
+    console.log("User:", req.user);
+    console.log("Body:", req.body);
+
     const { githubUsername } = req.body;
 
     if (!githubUsername) {
@@ -10,6 +14,7 @@ const syncProjects = async (req, res) => {
     }
 
     const repos = await syncGithubRepos(githubUsername);
+    console.log("Repos fetched:", repos.length);
 
     const savedProjects = await Promise.all(
       repos.map((repo) =>
@@ -28,6 +33,8 @@ const syncProjects = async (req, res) => {
       projects: savedProjects,
     });
   } catch (error) {
+    console.error("GITHUB SYNC ERROR:", error);
+
     res.status(500).json({
       message: "GitHub sync failed",
       error: error.message,
