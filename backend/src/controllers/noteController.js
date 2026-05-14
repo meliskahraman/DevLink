@@ -46,7 +46,7 @@ const getArchitectureNotes = async (req, res) => {
       where: {
         user_id: req.user.id,
       },
-      attributes: ["id"],
+      attributes: ["id", "project_name"],
     });
 
     const projectIds = projects.map((project) => project.id);
@@ -58,8 +58,19 @@ const getArchitectureNotes = async (req, res) => {
       order: [["id", "DESC"]],
     });
 
+    const notesWithProjectNames = notes.map((note) => {
+      const project = projects.find(
+        (p) => String(p.id) === String(note.project_id)
+      );
+
+      return {
+        ...note.toJSON(),
+        project_name: project?.project_name || "Unknown Project",
+      };
+    });
+
     res.status(200).json({
-      notes,
+      notes: notesWithProjectNames,
     });
   } catch (error) {
     res.status(500).json({

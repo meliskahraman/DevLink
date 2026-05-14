@@ -46,6 +46,7 @@ function Dashboard() {
 
       setProjects(response.data.projects);
       setMessage("GitHub projects synced successfully.");
+      await fetchNotes();
     } catch (error) {
       setMessage(error.response?.data?.message || "GitHub sync failed.");
     }
@@ -245,7 +246,9 @@ function Dashboard() {
                   return (
                     <div className="note-item" key={note.id}>
                       <strong>
-                        {project?.project_name || "Unknown Project"}
+                        {project?.project_name ||
+                          note.project_name ||
+                          "Unknown Project"}
                       </strong>
                       <p>{note.note_content}</p>
                     </div>
