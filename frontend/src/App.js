@@ -2,13 +2,12 @@ import { useState } from "react";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import Dashboard from "./components/Dashboard";
+import useAuth from "./hooks/useAuth";
 import "./App.css";
 
 function App() {
   const [mode, setMode] = useState("login");
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    Boolean(localStorage.getItem("token"))
-  );
+  const { isLoggedIn, login } = useAuth();
 
   if (isLoggedIn) {
     return <Dashboard />;
@@ -49,7 +48,9 @@ function App() {
 
       <main className="premium-hero">
         <section className="hero-copy">
-          <span className="badge">Portfolio-driven job board for indie developers</span>
+          <span className="badge">
+            Portfolio-driven job board for indie developers
+          </span>
 
           <h1>
             Turn your GitHub projects into a verified technical portfolio.
@@ -62,8 +63,13 @@ function App() {
           </p>
 
           <div className="hero-actions">
-            <button onClick={() => setMode("register")}>Start Building</button>
-            <button className="secondary" onClick={() => setMode("login")}>
+            <button onClick={() => setMode("register")}>
+              Start Building
+            </button>
+            <button
+              className="secondary"
+              onClick={() => setMode("login")}
+            >
               Login to Dashboard
             </button>
           </div>
@@ -120,7 +126,9 @@ function App() {
                 <div className="mock-repo">
                   <div>
                     <h4>devlink-api</h4>
-                    <p>Express REST API with JWT authentication and PostgreSQL.</p>
+                    <p>
+                      Express REST API with JWT authentication and PostgreSQL.
+                    </p>
                   </div>
                   <span>Architecture documented</span>
                 </div>
@@ -128,7 +136,10 @@ function App() {
                 <div className="mock-repo">
                   <div>
                     <h4>portfolio-dashboard</h4>
-                    <p>React SPA for syncing projects and writing architecture notes.</p>
+                    <p>
+                      React SPA for syncing projects and writing architecture
+                      notes.
+                    </p>
                   </div>
                   <span>GitHub synced</span>
                 </div>
@@ -146,7 +157,7 @@ function App() {
 
           <div className="auth-floating-card">
             {mode === "login" ? (
-              <LoginForm onLogin={() => setIsLoggedIn(true)} />
+              <LoginForm onLogin={login} />
             ) : (
               <RegisterForm />
             )}
@@ -193,11 +204,17 @@ function App() {
         <div className="premium-feature-grid">
           <div>
             <h3>Verified project metadata</h3>
-            <p>Import real repository data from GitHub and store it persistently.</p>
+            <p>
+              Import real repository data from GitHub and store it
+              persistently.
+            </p>
           </div>
           <div>
             <h3>Architecture documentation</h3>
-            <p>Attach technical notes that explain why your system is designed that way.</p>
+            <p>
+              Attach technical notes that explain why your system is designed
+              that way.
+            </p>
           </div>
           <div>
             <h3>Secure authentication</h3>
@@ -205,7 +222,9 @@ function App() {
           </div>
           <div>
             <h3>Portfolio insights</h3>
-            <p>Track project count, technology usage, and portfolio completion.</p>
+            <p>
+              Track project count, technology usage, and portfolio completion.
+            </p>
           </div>
         </div>
       </section>
