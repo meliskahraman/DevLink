@@ -28,15 +28,25 @@ const filterCandidates = async (req, res) => {
       order: [["project_name", "ASC"]],
     });
 
-    const candidates = projects.map((project) => ({
-      developer_email: project.User?.email,
-      project_name: project.project_name,
-      tech_stack: project.tech_stack,
-      github_url: project.github_url,
-      architecture_notes: project.ArchitectureNotes.map(
-        (note) => note.note_content
-      ),
-    }));
+    const uniqueMap = new Map();
+
+    projects.forEach((project) => {
+      const key = `${project.user_id}-${project.github_url || project.project_name}`;
+
+      if (!uniqueMap.has(key)) {
+        uniqueMap.set(key, {
+          developer_email: project.User?.email,
+          project_name: project.project_name,
+          tech_stack: project.tech_stack,
+          github_url: project.github_url,
+          architecture_notes: project.ArchitectureNotes.map(
+            (note) => note.note_content
+          ),
+        });
+      }
+    });
+
+    const candidates = Array.from(uniqueMap.values());
 
     res.status(200).json({
       count: candidates.length,
