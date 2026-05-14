@@ -100,13 +100,13 @@ function Dashboard() {
             <div className="logo-mark">D</div>
             <div>
               <h2>DevLink</h2>
-              <p>Technical Portfolio</p>
+              <p>Technical Portfolio OS</p>
             </div>
           </div>
 
           <div className="sidebar-profile">
             <div className="profile-avatar">U</div>
-            <h3>Developer</h3>
+            <h3>Developer Workspace</h3>
             <p>{stats.totalProjects} repositories synced</p>
           </div>
 
@@ -127,11 +127,15 @@ function Dashboard() {
         <main className="dashboard-main">
           <section id="overview" className="dashboard-hero">
             <div>
-              <span className="badge">Architecture-Focused Portfolio</span>
-              <h1>Build a verified technical profile from your GitHub work.</h1>
+              <span className="badge">Developer Command Center</span>
+              <h1>
+                Transform repositories into
+                <br />
+                recruiter-ready technical portfolios.
+              </h1>
               <p>
-                Sync repositories, organize projects, and document the
-                architectural decisions behind your code.
+                Sync GitHub projects, document engineering decisions, and
+                showcase how you design scalable software systems.
               </p>
             </div>
           </section>
@@ -164,14 +168,14 @@ function Dashboard() {
             </div>
 
             <p>
-              Sync your repositories and add architecture notes to complete your
-              technical portfolio.
+              Sync repositories and add architecture notes to maximize the
+              technical depth of your portfolio.
             </p>
           </section>
 
           <section id="sync" className="dashboard-card">
             <h3>GitHub Project Sync</h3>
-            <p>Import your public repositories from GitHub.</p>
+            <p>Import your public repositories and verify project metadata.</p>
 
             <input
               type="text"
@@ -201,7 +205,8 @@ function Dashboard() {
                     <div>
                       <h4>{project.project_name}</h4>
                       <p>
-                        This repository is ready for architecture documentation.
+                        This repository is ready for architecture
+                        documentation.
                       </p>
                     </div>
 
@@ -225,10 +230,10 @@ function Dashboard() {
           </section>
 
           <section id="notes" className="dashboard-card">
-            <h3>Add Architecture Note</h3>
+            <h3>Architecture Notes</h3>
             <p>
-              Select a repository and explain design patterns, architectural
-              decisions, or technical trade-offs.
+              Explain design patterns, trade-offs, and technical decisions
+              behind each project.
             </p>
 
             <select
@@ -244,7 +249,7 @@ function Dashboard() {
             </select>
 
             <textarea
-              placeholder="Example: Used MVC architecture, JWT authentication, and PostgreSQL to separate concerns and improve maintainability."
+              placeholder="Example: Used layered architecture, JWT authentication, and PostgreSQL to separate concerns and improve maintainability."
               value={noteContent}
               onChange={(e) => setNoteContent(e.target.value)}
             />
@@ -278,10 +283,10 @@ function Dashboard() {
           </section>
 
           <section id="recruiter" className="dashboard-card">
-            <h3>Recruiter Filter Candidates</h3>
+            <h3>Recruiter Candidate Discovery</h3>
             <p>
-              Search developers by technology stack to discover relevant
-              technical portfolios.
+              Search developers by technology stack and evaluate their
+              engineering depth.
             </p>
 
             <input
@@ -291,7 +296,9 @@ function Dashboard() {
               onChange={(e) => setRecruiterTech(e.target.value)}
             />
 
-            <button onClick={handleFilterCandidates}>Filter Candidates</button>
+            <button onClick={handleFilterCandidates}>
+              Filter Candidates
+            </button>
 
             <div className="notes-list">
               <h4>Candidate Results</h4>
@@ -322,9 +329,11 @@ function Dashboard() {
                     {candidate.architecture_notes?.length > 0 && (
                       <div style={{ marginTop: "10px" }}>
                         <strong>Architecture Notes:</strong>
-                        {candidate.architecture_notes.map((note, noteIndex) => (
-                          <p key={noteIndex}>{note}</p>
-                        ))}
+                        {candidate.architecture_notes.map(
+                          (note, noteIndex) => (
+                            <p key={noteIndex}>{note}</p>
+                          )
+                        )}
                       </div>
                     )}
                   </div>

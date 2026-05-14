@@ -25,7 +25,7 @@ function App() {
         </div>
 
         <div className="nav-links">
-          <a href="#how">How it works</a>
+          <a href="#how">How it Works</a>
           <a href="#features">Features</a>
           <a href="#recruiters">Recruiters</a>
         </div>
@@ -49,49 +49,64 @@ function App() {
       <main className="premium-hero">
         <section className="hero-copy">
           <span className="badge">
-            Portfolio-driven job board for indie developers
+            The GitHub for Architecture-Driven Portfolios
           </span>
 
           <h1>
-            Turn your GitHub projects into a verified technical portfolio.
+            Show recruiters
+            <br />
+            how you think,
+            <br />
+            not just what you built.
           </h1>
 
           <p>
-            DevLink helps students and indie developers showcase not only what
-            they built, but how they designed it. Sync repositories, add
-            architecture notes, and present your engineering decisions clearly.
+            DevLink transforms GitHub repositories into verified technical
+            portfolios. Sync projects, document architectural decisions, and
+            present your engineering reasoning with clarity and credibility.
           </p>
 
           <div className="hero-actions">
             <button onClick={() => setMode("register")}>
-              Start Building
+              Build Your Portfolio
             </button>
+
             <button
               className="secondary"
               onClick={() => setMode("login")}
             >
-              Login to Dashboard
+              Open Dashboard
             </button>
           </div>
 
           <div className="hero-metrics">
             <div>
               <strong>GitHub</strong>
-              <span>Repository Sync</span>
+              <span>Live Repository Sync</span>
             </div>
             <div>
-              <strong>JWT</strong>
-              <span>Secure Auth</span>
+              <strong>Architecture</strong>
+              <span>Decision Documentation</span>
             </div>
             <div>
-              <strong>PostgreSQL</strong>
-              <span>Persistent Data</span>
+              <strong>Recruiters</strong>
+              <span>Technical Candidate Discovery</span>
             </div>
+          </div>
+
+          <div className="trust-strip">
+            <span>JWT Authentication</span>
+            <span>PostgreSQL</span>
+            <span>React</span>
+            <span>Express API</span>
           </div>
         </section>
 
         <section className="hero-showcase">
-          <div className="mock-browser">
+          <div className="orb orb-one"></div>
+          <div className="orb orb-two"></div>
+
+          <div className="mock-browser floating-card">
             <div className="mock-top">
               <span></span>
               <span></span>
@@ -103,7 +118,7 @@ function App() {
               <div className="mock-sidebar">
                 <div className="mock-avatar">M</div>
                 <h4>Melis Kahraman</h4>
-                <p>Frontend & Architecture Portfolio</p>
+                <p>Frontend Developer & Software Architect</p>
                 <button>Public Portfolio</button>
               </div>
 
@@ -115,40 +130,40 @@ function App() {
                   </div>
                   <div>
                     <b>8</b>
-                    <span>Notes</span>
+                    <span>Architecture Notes</span>
                   </div>
                   <div>
                     <b>86%</b>
-                    <span>Complete</span>
+                    <span>Portfolio Completion</span>
                   </div>
                 </div>
 
                 <div className="mock-repo">
                   <div>
-                    <h4>devlink-api</h4>
+                    <h4>DevLink API</h4>
                     <p>
                       Express REST API with JWT authentication and PostgreSQL.
                     </p>
                   </div>
-                  <span>Architecture documented</span>
+                  <span>Verified</span>
                 </div>
 
                 <div className="mock-repo">
                   <div>
-                    <h4>portfolio-dashboard</h4>
+                    <h4>Portfolio Dashboard</h4>
                     <p>
-                      React SPA for syncing projects and writing architecture
-                      notes.
+                      React SPA for syncing repositories and writing
+                      architecture notes.
                     </p>
                   </div>
-                  <span>GitHub synced</span>
+                  <span>Synced</span>
                 </div>
 
                 <div className="mock-note">
-                  <h4>Architecture Note</h4>
+                  <h4>Engineering Decision</h4>
                   <p>
-                    Used layered architecture to separate presentation,
-                    service, API, and persistence concerns.
+                    Applied layered architecture to separate presentation,
+                    services, APIs, and persistence for maintainability.
                   </p>
                 </div>
               </div>
@@ -167,63 +182,71 @@ function App() {
 
       <section id="how" className="section-block">
         <div className="section-heading">
-          <span className="badge">How it works</span>
-          <h2>From repository to recruiter-ready portfolio.</h2>
+          <span className="badge">How It Works</span>
+          <h2>From repository to recruiter-ready technical portfolio.</h2>
         </div>
 
         <div className="steps-grid">
           <div>
             <span>01</span>
-            <h3>Create account</h3>
-            <p>Register securely and access your developer dashboard.</p>
+            <h3>Create Account</h3>
+            <p>Register securely and access your technical portfolio hub.</p>
           </div>
+
           <div>
             <span>02</span>
             <h3>Sync GitHub</h3>
-            <p>Import public repositories into your technical profile.</p>
+            <p>Import your public repositories automatically.</p>
           </div>
+
           <div>
             <span>03</span>
-            <h3>Add architecture notes</h3>
-            <p>Explain design patterns, trade-offs, and system decisions.</p>
+            <h3>Add Architecture Notes</h3>
+            <p>Explain technical decisions, trade-offs, and patterns.</p>
           </div>
+
           <div>
             <span>04</span>
-            <h3>Show your portfolio</h3>
-            <p>Present engineering thinking, not only project names.</p>
+            <h3>Get Discovered</h3>
+            <p>Recruiters search by technology and architectural thinking.</p>
           </div>
         </div>
       </section>
 
       <section id="features" className="section-block">
         <div className="section-heading">
-          <span className="badge">Features</span>
-          <h2>Built for architecture-focused technical portfolios.</h2>
+          <span className="badge">Platform Capabilities</span>
+          <h2>A premium portfolio system for serious developers.</h2>
         </div>
 
         <div className="premium-feature-grid">
           <div>
-            <h3>Verified project metadata</h3>
+            <h3>Verified Repository Data</h3>
             <p>
-              Import real repository data from GitHub and store it
-              persistently.
+              Connect directly to GitHub and showcase authentic project
+              metadata.
             </p>
           </div>
+
           <div>
-            <h3>Architecture documentation</h3>
+            <h3>Architecture Intelligence</h3>
             <p>
-              Attach technical notes that explain why your system is designed
-              that way.
+              Highlight design patterns, system structure, and technical
+              decisions.
             </p>
           </div>
+
           <div>
-            <h3>Secure authentication</h3>
-            <p>JWT-based login protects portfolio management features.</p>
-          </div>
-          <div>
-            <h3>Portfolio insights</h3>
+            <h3>Recruiter Discovery</h3>
             <p>
-              Track project count, technology usage, and portfolio completion.
+              Filter candidates by technology stack and engineering depth.
+            </p>
+          </div>
+
+          <div>
+            <h3>Secure Infrastructure</h3>
+            <p>
+              Built with React, Express, JWT authentication, and PostgreSQL.
             </p>
           </div>
         </div>
@@ -231,22 +254,22 @@ function App() {
 
       <section id="recruiters" className="recruiter-section">
         <div>
-          <span className="badge">For recruiters</span>
-          <h2>Evaluate how developers think, not only what they built.</h2>
+          <span className="badge">For Recruiters</span>
+          <h2>Evaluate engineering thinking before the interview.</h2>
           <p>
-            DevLink makes architectural decisions visible. Recruiters can
-            understand technology choices, design patterns, and engineering
-            reasoning before an interview.
+            DevLink reveals architecture decisions, technical trade-offs, and
+            implementation reasoning—providing a deeper signal than a standard
+            résumé or repository list.
           </p>
         </div>
 
         <div className="recruiter-card">
           <h3>Candidate Signal</h3>
           <ul>
-            <li>Project ownership</li>
-            <li>Architecture awareness</li>
-            <li>Technology experience</li>
-            <li>Decision-making clarity</li>
+            <li>Repository Ownership</li>
+            <li>Architecture Awareness</li>
+            <li>Technology Experience</li>
+            <li>Decision-Making Clarity</li>
           </ul>
         </div>
       </section>
