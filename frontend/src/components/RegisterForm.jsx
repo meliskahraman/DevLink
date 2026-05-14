@@ -11,7 +11,7 @@ function RegisterForm() {
 
     try {
       const response = await axios.post(
-        "https://devlink-api-3y46.onrender.com/api/auth/register",
+        `${process.env.REACT_APP_API_URL}/api/auth/register`,
         {
           email,
           password,
@@ -41,7 +41,8 @@ function RegisterForm() {
           required
         />
 
-        <br /><br />
+        <br />
+        <br />
 
         <input
           type="password"
@@ -51,7 +52,8 @@ function RegisterForm() {
           required
         />
 
-        <br /><br />
+        <br />
+        <br />
 
         <button type="submit">Register</button>
       </form>

@@ -11,7 +11,7 @@ function LoginForm() {
 
     try {
       const response = await axios.post(
-        "https://devlink-api-3y46.onrender.com/api/auth/login",
+        `${process.env.REACT_APP_API_URL}/api/auth/login`,
         {
           email,
           password,
@@ -47,7 +47,8 @@ function LoginForm() {
           required
         />
 
-        <br /><br />
+        <br />
+        <br />
 
         <input
           type="password"
@@ -57,7 +58,8 @@ function LoginForm() {
           required
         />
 
-        <br /><br />
+        <br />
+        <br />
 
         <button type="submit">Login</button>
       </form>

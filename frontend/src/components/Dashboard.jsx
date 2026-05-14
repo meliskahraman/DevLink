@@ -29,7 +29,7 @@ function Dashboard() {
   const handleSync = async () => {
     try {
       const response = await axios.post(
-        "https://devlink-api-3y46.onrender.com/api/projects/sync",
+        `${process.env.REACT_APP_API_URL}/api/projects/sync`,
         { githubUsername },
         {
           headers: {
@@ -48,7 +48,7 @@ function Dashboard() {
   const handleAddNote = async () => {
     try {
       const response = await axios.post(
-        "https://devlink-api-3y46.onrender.com/api/architecture-notes",
+        `${process.env.REACT_APP_API_URL}/api/architecture-notes`,
         {
           project_id: selectedProjectId,
           note_content: noteContent,
