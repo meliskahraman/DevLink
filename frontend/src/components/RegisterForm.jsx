@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 
 function RegisterForm() {
   const [email, setEmail] = useState("");
@@ -10,13 +10,10 @@ function RegisterForm() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/auth/register`,
-        {
-          email,
-          password,
-        }
-      );
+      const response = await api.post("/api/auth/register", {
+        email,
+        password,
+      });
 
       setMessage(response.data.message);
       setEmail("");

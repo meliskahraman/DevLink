@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 
 function Dashboard() {
   const [githubUsername, setGithubUsername] = useState("");
@@ -7,8 +7,6 @@ function Dashboard() {
   const [selectedProjectId, setSelectedProjectId] = useState("");
   const [noteContent, setNoteContent] = useState("");
   const [message, setMessage] = useState("");
-
-  const token = localStorage.getItem("token");
 
   const stats = useMemo(() => {
     const totalProjects = projects.length;
@@ -28,15 +26,9 @@ function Dashboard() {
 
   const handleSync = async () => {
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/projects/sync`,
-        { githubUsername },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await api.post("/api/projects/sync", {
+        githubUsername,
+      });
 
       setProjects(response.data.projects);
       setMessage("GitHub projects synced successfully.");
@@ -47,18 +39,10 @@ function Dashboard() {
 
   const handleAddNote = async () => {
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/architecture-notes`,
-        {
-          project_id: selectedProjectId,
-          note_content: noteContent,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await api.post("/api/architecture-notes", {
+        project_id: selectedProjectId,
+        note_content: noteContent,
+      });
 
       setMessage(response.data.message);
       setNoteContent("");

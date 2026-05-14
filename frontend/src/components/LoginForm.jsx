@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -9,22 +9,11 @@ function LoginForm() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Önce Vercel environment variable'ı kullan,
-    // yoksa sabit URL'ye düş.
-    const API_URL =
-      process.env.REACT_APP_API_URL ||
-      "https://devlink-api-3y46.onrender.com";
-
-    console.log("API URL:", API_URL);
-
     try {
-      const response = await axios.post(
-        `${API_URL}/api/auth/login`,
-        {
-          email,
-          password,
-        }
-      );
+      const response = await api.post("/api/auth/login", {
+        email,
+        password,
+      });
 
       const token = response.data.token;
 
